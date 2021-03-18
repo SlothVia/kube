@@ -13,8 +13,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1   # Nbre de pod supplémentaire autorisés dans le deployment
-      maxUnavailable: 0 # Nbre de pod down/détruit autorisé
+      maxSurge: 1 # 5%  # Nbre de pod supplémentaire autorisés dans le deployment
+      maxUnavailable: 0 # 1% # Nbre de pod down/détruit autorisé
   template:
     metadata:
       labels:

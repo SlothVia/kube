@@ -34,14 +34,15 @@ Dans cet exercice, vous allez effectuer un scaling update ainsi qu'un rolling up
 
 ## 1. Scaling
 
-Changez le nombre de replicas du deployment *frontend* de façon à en avoir 10.
+Changez le nombre de replicas du deployment *frontend* de façon à en avoir 10 puis 1 seul
 
 >Note: pour cela vous pourrez avoir besoin de la commande $ kubectl scale .... 
 
 >L'aide en ligne $ kubectl scale --help donne quelques exemples d'utilisation.
 
 ```
-kubectl scale --replicas 10 deployment frontend
+$ kubectl scale --replicas 10 deployment frontend
+$ kubectl scale --replicas=1 deployment frontend
 ```
 
 ## 2. Mise à jour de l'image
