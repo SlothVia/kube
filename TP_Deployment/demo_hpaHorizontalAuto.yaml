@@ -1,7 +1,17 @@
+---
+# Création d'un namespace dedié
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubernetes-demo-hpa
+
+---
+
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: frontend
+  namespace: kubernetes-demo-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
@@ -10,3 +20,32 @@ spec:
   minReplicas: 5
   maxReplicas: 30
   targetCPUUtilizationPercentage: 10
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: kubernetes-demo-hpa
+  labels:
+    projet: tp_deploy
+    type: deploy-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: bilbloke/frontend:1.0
+        ports:
+        - containerPort: 80
+        resources:
+            requests:
+              cpu: 10m
