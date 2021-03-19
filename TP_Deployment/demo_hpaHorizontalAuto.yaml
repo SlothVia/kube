@@ -11,6 +11,8 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: frontend-hpa
+  labels:
+    app: frontend-hpa
   namespace: kubernetes-demo-hpa
 spec:
   scaleTargetRef:
@@ -35,11 +37,11 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: frontend
+      app: frontend-hpa
   template:
     metadata:
       labels:
-        app: frontend
+        app: frontend-hpa
     spec:
       containers:
       - name: frontend
@@ -52,3 +54,22 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "10m"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-hpa
+  namespace: kubernetes-demo-hpa
+  labels:
+    app: frontend-hpa
+    projet: tp_deploy
+spec:
+  selector:
+    app: frontend-hpa
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30001
