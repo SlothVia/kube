@@ -112,3 +112,18 @@ https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-
 kubectl create secret generic imperative-secret --from-literal='username=my-app'
 secret/imperative-secret created
 ```
+
+
+## namsepace:
+
+> isoler la vue sur les ressource, partage d'un cluster par équipe, projets appli
+
+> Notion de contexte du binaire kubectl
+
+```
+$ kubectl config get-contexts
+$ kubectl config set-context --current  --namespace kubernetes-demo-hpa
+$ kubectl config get-contexts
+$ kubectl get all
+```
+
